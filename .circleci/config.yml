@@ -41,6 +41,20 @@ jobs:
           name: "Say World"
           command: "echo ...World and PeterH!"
 
+  print-myname:
+    environment:
+      FULL_NAME: "Peter Huynh Fullname 1"
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: "Print My FullName 1 in Job"
+          command: echo $FULL_NAME
+      - run:
+          name: "Print My FullName 2 in Project ENV Variables "
+          command: echo $MY_ENV_FULLNAME
+
 workflows:
   say-hello-workflow:
     jobs:
@@ -48,3 +62,6 @@ workflows:
       - print-hello
       - print-world:
           requires: [print-hello]
+          # requires:
+          #   - print-hello
+      - print-myname
