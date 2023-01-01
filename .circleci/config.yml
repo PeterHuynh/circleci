@@ -29,8 +29,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: "Say Hello"
-        command: "echo Hello..."
+          name: "Say Hello"
+          command: "echo Hello..."
 
   print-world:
     docker:
@@ -38,8 +38,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: "Say World"
-        command: "echo ...World and PeterH!"
+          name: "Say World"
+          command: "echo ...World and PeterH!"
 
 workflows:
   say-hello-workflow:
