@@ -21,7 +21,7 @@ jobs:
   # Invoke jobs via workflows
   # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 
-  print_hello:
+  print-hello:
     environment:
       NAME: PeterH
     docker:
@@ -32,7 +32,7 @@ jobs:
         name: "Say Hello"
         command: "echo Hello..."
 
-  print_world:
+  print-world:
     docker:
       - image: cimg/node:13.8.0
     steps:
@@ -45,6 +45,6 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-      - print_hello
-      - print_world:
-          requires: [print_hello]
+      - print-hello
+      - print-world:
+          requires: [print-hello]
