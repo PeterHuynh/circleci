@@ -144,8 +144,10 @@ jobs:
     docker:
       - image: cimg/node:13.8.0
     steps:
-      run: echo "Teting on_fail trigger of step/command"
-      run: cat /tmp/non-exist-file.txt
+      run: 
+        command: echo "Teting on_fail trigger of step/command"
+      run:
+        command: cat /tmp/non-exist-file.txt
       run:
         name: "command run when there is return zero code of executed command"
         command: echo "There is fail step of job, please check"
