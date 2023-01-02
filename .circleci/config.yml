@@ -11,8 +11,13 @@ version: 2.1
 commands:
   print_pineline_id:
     description: "Print pineline id"
+    parameters:
+      id:
+        type: string
+        default: "123abc"
     steps:
-      - run: echo ${CIRCLE_WORKFLOW_ID}
+      #- run: echo ${CIRCLE_WORKFLOW_ID}
+      - run: echo << parameters.id >>
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -130,7 +135,9 @@ jobs:
     docker:
       - image: cimg/node:13.8.0
     steps:
-      - print_pineline_id
+      - print_pineline_id:
+          id: << pineline.id >>
+      # - print_pineline_id
 
 workflows:
   my-tutorial-workflow:
