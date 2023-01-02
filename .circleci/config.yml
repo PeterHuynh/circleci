@@ -130,7 +130,7 @@ jobs:
     docker:
       - image: cimg/node:13.8.0
     steps:
-      - commands.print_pineline_id
+      - print_pineline_id
 
 workflows:
   my-tutorial-workflow:
