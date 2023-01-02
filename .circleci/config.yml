@@ -140,6 +140,15 @@ jobs:
           id: ${CIRCLE_WORKFLOW_ID}
       # - print_pineline_id
 
+  test-on-failure:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
+      run: echo "Teting on_fail trigger of step/command"
+      run: cat /tmp/non-exist-file.txt
+      run: echo "There is fail step of job, please check"
+        when: on_fail
+
 workflows:
   my-tutorial-workflow:
     jobs:
@@ -155,3 +164,4 @@ workflows:
       #     requires:
       #       - save_hello_world_output
       - print-pineline-id
+      - test-on-failure
