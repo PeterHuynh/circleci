@@ -90,7 +90,7 @@ jobs:
           at: /tmp/workspace
       - run:
           name: "display output file"
-          command: cat output.txt
+          command: cat /tmp/workspace/output.txt
 
 workflows:
   say-hello-workflow:
