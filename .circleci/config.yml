@@ -102,6 +102,7 @@ jobs:
           name: "save hello world output to file"
           command: echo "hello world output" > ~/output.txt
       - run: cat ~/output.txt
+      - run: echo ~/
       - persist_to_workspace:
           root: ~/
           paths:
@@ -115,10 +116,10 @@ jobs:
       # - checkout
       - attach_workspace:
           at: ~/
-      - run: echo ${pwd}; echo ${HOME}; echo ~/
+      - run: echo ${pwd}; echo ${HOME};
       - run:
           name: "display output file"
-          command: cat ~/output.txt
+          command: cat output.txt
 
 workflows:
   say-hello-workflow:
