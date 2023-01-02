@@ -59,6 +59,30 @@ jobs:
           command: |
             echo $MY_ENV_VAR
 
+  save_hello_world_output:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
+      - checkout
+      - run:
+        name: "save hello world output to file"
+        command: echo "hello world output" > output.txt
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - outputs
+
+  print_output_file:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: "display output file"
+          command: cat outputs/output.txt
+      - attach_workspace:
+          at: /tmp/workspace
+
 workflows:
   say-hello-workflow:
     jobs:
