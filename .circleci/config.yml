@@ -2,136 +2,148 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-executors:
-  my-executor:
-    docker:
-      - image: cimg/node:13.8.0
-    #working_directory: /tmp
+# executors:
+#   my-executor:
+#     docker:
+#       - image: cimg/node:13.8.0
+#     working_directory: /tmp
+
+commands:
+  print_pineline_id:
+    description: "Print pineline id"
+    steps:
+      - run: echo $CIRCLE_WORKFLOW_ID
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+  # say-hello:
+  #   # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  #   docker:
+  #     - image: cimg/base:stable
+  #   # Add steps to the job
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "Say hello"
+  #         command: "echo Hello, World!"
 
-  # Invoke jobs via workflows
-  # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+  # # Invoke jobs via workflows
+  # # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 
-  print-hello:
-    environment:
-      NAME: PeterH
+  # print-hello:
+  #   environment:
+  #     NAME: PeterH
+  #   docker:
+  #     - image: cimg/node:13.8.0
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "Say Hello"
+  #         command: "echo Hello..."
+
+  # print-world:
+  #   docker:
+  #     - image: cimg/node:13.8.0
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "Say World"
+  #         command: "echo ...World and PeterH!"
+
+  # print-myname:
+  #   environment:
+  #     FULL_NAME: "Peter Huynh Job Fullname"
+  #   docker:
+  #     - image: cimg/node:13.8.0
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "Print My FULL_NAME env variable in Job"
+  #         command: echo ${FULL_NAME}
+  #     - run:
+  #         name: "Print My FULL_NAME in Project ENV variable"
+  #         command: echo ${MY_ENV_FULLNAME}
+  #     - run:
+  #         name: "echo an env var that is part of our project"
+  #         command: |
+  #           echo $MY_ENV_VAR
+
+  # save_hello_world_output:
+  #   # docker:
+  #   #   - image: cimg/node:13.8.0
+  #   executor: my-executor
+  #   steps:
+  #     #- checkout
+  #     - run: mkdir -p /tmp/workspace
+  #     - run:
+  #         name: "save hello world output to file"
+  #         command: echo "hello world output" > /tmp/workspace/output.txt
+  #     - persist_to_workspace:
+  #         root: /tmp/workspace
+  #         paths:
+  #           - output.txt
+
+  # print_output_file:
+  #   # docker:
+  #   #   - image: cimg/node:13.8.0
+  #   executor: my-executor
+  #   steps:
+  #     # - checkout
+  #     - attach_workspace:
+  #         at: /tmp/workspace
+  #     - run:
+  #         name: "display output file"
+  #         command: cat /tmp/workspace/output.txt
+  # save_hello_world_output:
+  #   docker:
+  #     - image: cimg/node:13.8.0
+  #   #executor: my-executor
+  #   steps:
+  #     #- checkout
+  #     #- run: mkdir -p /tmp/workspace
+  #     - run:
+  #         name: "save hello world output to file"
+  #         command: echo "hello world output" > ~/output.txt
+  #     - run: cat ~/output.txt
+  #     - run: echo ~/
+  #     - persist_to_workspace:
+  #         root: ~/
+  #         paths:
+  #           - output.txt
+
+  # print_output_file:
+  #   docker:
+  #     - image: cimg/node:13.8.0
+  #   #executor: my-executor
+  #   steps:
+  #     # - checkout
+  #     - attach_workspace:
+  #         at: ~/
+  #     - run: echo ${pwd}; echo ~/;
+  #     - run:
+  #         name: "display output file"
+  #         command: cat ~/output.txt
+  print-pineline-id:
     docker:
       - image: cimg/node:13.8.0
     steps:
-      - checkout
-      - run:
-          name: "Say Hello"
-          command: "echo Hello..."
-
-  print-world:
-    docker:
-      - image: cimg/node:13.8.0
-    steps:
-      - checkout
-      - run:
-          name: "Say World"
-          command: "echo ...World and PeterH!"
-
-  print-myname:
-    environment:
-      FULL_NAME: "Peter Huynh Job Fullname"
-    docker:
-      - image: cimg/node:13.8.0
-    steps:
-      - checkout
-      - run:
-          name: "Print My FULL_NAME env variable in Job"
-          command: echo ${FULL_NAME}
-      - run:
-          name: "Print My FULL_NAME in Project ENV variable"
-          command: echo ${MY_ENV_FULLNAME}
-      - run:
-          name: "echo an env var that is part of our project"
-          command: |
-            echo $MY_ENV_VAR
-
-    # save_hello_world_output:
-    #   # docker:
-    #   #   - image: cimg/node:13.8.0
-    #   executor: my-executor
-    #   steps:
-    #     #- checkout
-    #     - run: mkdir -p /tmp/workspace
-    #     - run:
-    #         name: "save hello world output to file"
-    #         command: echo "hello world output" > /tmp/workspace/output.txt
-    #     - persist_to_workspace:
-    #         root: /tmp/workspace
-    #         paths:
-    #           - output.txt
-
-    # print_output_file:
-    #   # docker:
-    #   #   - image: cimg/node:13.8.0
-    #   executor: my-executor
-    #   steps:
-    #     # - checkout
-    #     - attach_workspace:
-    #         at: /tmp/workspace
-    #     - run:
-    #         name: "display output file"
-    #         command: cat /tmp/workspace/output.txt
-  save_hello_world_output:
-    docker:
-      - image: cimg/node:13.8.0
-    #executor: my-executor
-    steps:
-      #- checkout
-      #- run: mkdir -p /tmp/workspace
-      - run:
-          name: "save hello world output to file"
-          command: echo "hello world output" > ~/output.txt
-      - run: cat ~/output.txt
-      - run: echo ~/
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - output.txt
-
-  print_output_file:
-    docker:
-      - image: cimg/node:13.8.0
-    #executor: my-executor
-    steps:
-      # - checkout
-      - attach_workspace:
-          at: ~/
-      - run: echo ${pwd}; echo ${HOME};
-      - run:
-          name: "display output file"
-          command: cat ~/output.txt
+      run: commands.print_pineline_id
 
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello
-      - print-hello
-      - print-world:
-          requires: [print-hello]
-          # requires:
-          #   - print-hello
-      - print-myname
-      - save_hello_world_output
-      - print_output_file:
-          requires:
-            - save_hello_world_output
+      # - say-hello
+      # - print-hello
+      # - print-world:
+      #     requires: [print-hello]
+      #     # requires:
+      #     #   - print-hello
+      # - print-myname
+      # - save_hello_world_output
+      # - print_output_file:
+      #     requires:
+      #       - save_hello_world_output
+      - print-pineline-id
