@@ -70,7 +70,7 @@ jobs:
     #   - image: cimg/node:13.8.0
     executor: my-executor
     steps:
-      - checkout
+      #- checkout
       - run: mkdir -p /tmp/workspace
       - run:
           name: "save hello world output to file"
@@ -85,12 +85,12 @@ jobs:
     #   - image: cimg/node:13.8.0
     executor: my-executor
     steps:
-      - checkout
+      # - checkout
       - attach_workspace:
           at: /tmp/workspace
       - run:
           name: "display output file"
-          command: cat output.txt
+          command: cat /tmp/workspace/output.txt
 
 workflows:
   say-hello-workflow:
