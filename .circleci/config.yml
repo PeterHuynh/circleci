@@ -72,15 +72,13 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p /tmp/workspace
-      - run: touch /tmp/workspcace/output.txt
       - run:
           name: "save hello world output to file"
           command: echo "hello world output" > /tmp/workspace/output.txt
       - persist_to_workspace:
-          root: /tmp
+          root: /tmp/workspace
           paths:
-            - workspace
-            - workspace/output.txt
+            - output.txt
 
   print_output_file:
     # docker:
