@@ -136,7 +136,8 @@ jobs:
       - image: cimg/node:13.8.0
     steps:
       - print_pineline_id:
-          id: << pineline.id >>
+          # id: << pineline.id >>
+          id: echo ${CIRCLE_WORKFLOW_ID}
       # - print_pineline_id
 
 workflows:
