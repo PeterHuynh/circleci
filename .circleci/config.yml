@@ -119,7 +119,7 @@ jobs:
       - run: echo ${pwd}; echo ${HOME};
       - run:
           name: "display output file"
-          command: cat output.txt
+          command: cat ~/output.txt
 
 workflows:
   say-hello-workflow:
@@ -132,4 +132,6 @@ workflows:
           #   - print-hello
       - print-myname
       - save_hello_world_output
-      - print_output_file
+      - print_output_file:
+          requires:
+            - save_hello_world_output
