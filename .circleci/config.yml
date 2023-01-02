@@ -72,6 +72,7 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p /tmp/workspace
+      - run: touch /tmp/workspcace/output.txt
       - run:
           name: "save hello world output to file"
           command: echo "hello world output" > /tmp/workspace/output.txt
