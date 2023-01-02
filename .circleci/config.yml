@@ -71,12 +71,12 @@ jobs:
     executor: my-executor
     steps:
       - checkout
-      - run: mkdir -p workspace
+      - run: mkdir -p /tmp/workspace
       - run:
           name: "save hello world output to file"
-          command: echo "hello world output" > workspace/output.txt
+          command: echo "hello world output" > /tmp/workspace/output.txt
       - persist_to_workspace:
-          root: workspace
+          root: /tmp/workspace
           paths:
             - output.txt
 
