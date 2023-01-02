@@ -65,8 +65,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: "save hello world output to file"
-        command: echo "hello world output" > output.txt
+          name: "save hello world output to file"
+          command: echo "hello world output" > output.txt
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
