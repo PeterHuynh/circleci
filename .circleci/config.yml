@@ -146,7 +146,9 @@ jobs:
     steps:
       run: echo "Teting on_fail trigger of step/command"
       run: cat /tmp/non-exist-file.txt
-      run: echo "There is fail step of job, please check"
+      run:
+        name: "command run when there is return zero code of executed command"
+        command: echo "There is fail step of job, please check"
         when: on_fail
 
 workflows:
